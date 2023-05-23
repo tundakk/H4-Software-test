@@ -1,6 +1,5 @@
 namespace H4_Software_test.Areas.Identity
 {
-    using Microsoft.AspNetCore.Components;
     using Microsoft.AspNetCore.Components.Authorization;
     using Microsoft.AspNetCore.Components.Server;
     using Microsoft.AspNetCore.Identity;
@@ -25,6 +24,11 @@ namespace H4_Software_test.Areas.Identity
 
         protected override TimeSpan RevalidationInterval => TimeSpan.FromMinutes(30);
 
+        /// <summary>
+        /// The validate authentication state async method is responsible for validating the user's authentication state.
+        /// </summary>
+        /// <param name="authenticationState">AuthenticationState provides information on the current autheticated user. If any.</param>
+        /// <param name="cancellationToken"></param>
         protected override async Task<bool> ValidateAuthenticationStateAsync(
             AuthenticationState authenticationState, CancellationToken cancellationToken)
         {
