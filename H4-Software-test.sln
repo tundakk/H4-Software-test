@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33712.159
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "H4-Software-test", "H4-Software-test\H4-Software-test.csproj", "{4004DCD1-861B-4289-8161-4BF245448A65}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "H4-Software-test.Tests", "H4-Software-test.Tests\H4-Software-test.Tests.csproj", "{F0A21931-C678-474C-900E-6F19AE0C1729}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4004DCD1-861B-4289-8161-4BF245448A65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4004DCD1-861B-4289-8161-4BF245448A65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4004DCD1-861B-4289-8161-4BF245448A65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4004DCD1-861B-4289-8161-4BF245448A65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0A21931-C678-474C-900E-6F19AE0C1729}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0A21931-C678-474C-900E-6F19AE0C1729}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0A21931-C678-474C-900E-6F19AE0C1729}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0A21931-C678-474C-900E-6F19AE0C1729}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1A913376-993C-4516-86C1-B94FF9E25CE9}
+	EndGlobalSection
+EndGlobal
