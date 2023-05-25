@@ -1,0 +1,44 @@
+﻿@page "/createfile"
+
+@using System.IO
+<AuthorizeView>
+    <Authorized>
+<input @bind="fileName" placeholder="Enter filename here" />
+
+<button class="btn btn-primary" @onclick="CreateFile">Create File</button>
+</Authorized>
+    <NotAuthorized>
+        <p>You are not authorized to view this page.</p>
+    </NotAuthorized>
+</AuthorizeView>
+
+
+@code {
+    private string fileName = "testfile.txt";  // default filename if user doesn't input anything
+
+    private void CreateFile()
+    {
+        string content = "Hello, world!";
+        string dirPath = "";
+        string filePath = "";
+
+        dirPath = Path.Combine(Directory.GetCurrentDirectory(), "TextFiles");
+
+        try
+        {
+            // Create the directory if it doesn't exist
+            Directory.CreateDirectory(dirPath);
+
+            // Create the full file path
+            filePath = Path.Combine(dirPath, fileName);
+
+            // Write the file
+            File.WriteAllText(filePath, content);
+        }
+        catch (Exception ex)
+        {
+            // Output the exception to the console for debugging purposes
+            Console.WriteLine(ex.ToString());
+        }
+    }
+}

@@ -1,5 +1,6 @@
 using H4_Software_test.Areas.Identity;
 using H4_Software_test.Data;
+using H4_Software_test.Models;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
@@ -23,13 +24,26 @@ builder.Services.Configure<KestrelServerOptions>(options =>
     options.ConfigureHttpsDefaults(o =>
     {
         o.ClientCertificateMode = ClientCertificateMode.RequireCertificate; // to force user authentication
-        var cert = new X509Certificate2(@"<CERTIFICATE-FILE-LOCATION>", "<CERTIFICATE-FILE-PASSWORD>"); // put the actual certificate file location and password here
-        o.ServerCertificate = cert;
-        o.ClientCertificateValidation = (certificate2, chain, errors) =>
+        //instanciate the certificate
+        X509Certificate2 cert = null;
+        if (Environment.OSVersion.Platform == PlatformID.Unix)
         {
-            // TODO: Implement certificate validation logic if needed
-            return true;
-        };
+            cert = new X509Certificate2("/home/nwj/.aspnet/https/aspnetapp.pfx", "YourPassword");
+        }
+        else if (Environment.OSVersion.Platform == PlatformID.Win32NT)
+        {
+            cert = new X509Certificate2(@"C:\Skole\Afgangsprojekt\H4-Software-test\Certs\.aspnet\https\aspnetapp.pfx", "436407"); // put the actual certificate file location and password here
+
+        }
+        if (cert is not null)
+        {
+            o.ServerCertificate = cert;
+            o.ClientCertificateValidation = (certificate2, chain, errors) =>
+            {
+                // TODO: Implement certificate validation logic if needed
+                return true;
+            };
+        }
     });
 });
 
@@ -71,6 +85,10 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
 
+// Disse blev brugt da jeg ville oprette tekstfiler i databasen
+//builder.Services.AddScoped<ITextFilesService, TextFilesService>();
+//builder.Services.AddScoped<ITextFilesRepo, TextFilesRepo>();
+
 builder.Services.AddAuthorization(options =>
 {
     //add authentication for user
@@ -79,6 +97,16 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("RequireAdministratorRole",
                policy => policy.RequireRole("admin"));
 });
+// Read the connection string from the appsettings.json file
+
+// Set the database connection for the custom DbContext class
+
+builder.Services.AddDbContext<aspnetH4Softwaretest3a56d5607b184dc6bb4f36cb9fd57e40Context>(options =>
+
+options.UseSqlServer(
+
+    builder.Configuration.GetConnectionString("DefaultConnection")));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
